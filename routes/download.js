@@ -11,18 +11,19 @@ router.get('/:id', async (req, res) => {
         console.log(file);
         
         if(!file){
-            res.status(404).send({
+            res.status(404).render('download', {
                 error : 'Link has expired!'
             });
         }
 
-        const downloadPath =path.join(__dirname, '..', file.path);
+        const filePath =path.join(__dirname, '..', file.path);
 
-        res.download(downloadPath);
+        res.download(filePath);
 
     } catch(e){
-        // will be rendered
-        res.status(500).send(e);
+        res.status(500).render('download', {
+            error : 'Something went wrong!'
+        });
     }
 })
 
