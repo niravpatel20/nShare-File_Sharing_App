@@ -114,6 +114,9 @@ const uploadFile = () => {
   // listen for response which will give the link
   xhr.onreadystatechange = function () {
     if (xhr.readyState == XMLHttpRequest.DONE) {
+
+      console.log(xhr);
+      console.log(xhr.responseText);
       onFileUploadSuccess(xhr.responseText);
     }
   };
@@ -131,8 +134,9 @@ const onFileUploadSuccess = (res) => {
   emailForm[2].innerText = "Send";
   progressContainer.style.display = "none"; // hide the box
 
+  console.log(JSON.parse(res));
   const { file: url } = JSON.parse(res);
-  console.log(url);
+  console.log("URL" , url);
   sharingContainer.style.display = "block";
   fileURL.value = url;
 };
